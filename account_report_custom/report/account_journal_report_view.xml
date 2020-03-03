@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--template id="account_report_custom_layout" name="Account report layout">
+        &lt;!DOCTYPE html&gt;
+        <html t-att-lang="lang and lang.replace('_', '-')"
+              t-att-data-editable="'1' if editable else None"
+              t-att-data-translatable="'1' if translatable else None"
+              t-att-data-edit_translations="'1' if edit_translations else None"
+              t-att-data-main-object="repr(main_object) if editable else None"
+              t-att-data-report-margin-top="data_report_margin_top"
+              t-att-data-report-header-spacing="data_report_header_spacing"
+              t-att-data-report-dpi="data_report_dpi"
+              t-att-data-report-landscape="data_report_landscape"
+              t-att-web-base-url="web_base_url">
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="initial-scale=1"/>
+                <title><t t-esc="title or 'Odoo Report'"/></title>
+                <t t-call-assets="web.assets_common" t-js="false"/>
+                <t t-call-assets="web.report_assets_common" t-js="false"/>
+                <t t-if="editable">
+                    <t t-call-assets="web_editor.summernote" t-js="false"/>
+                    <t t-call-assets="web_editor.assets_editor" t-js="false"/>
+                    <t t-call-assets="web.report_assets_editor" t-js="false"/>
+                </t>
+                <t t-call-assets="web.assets_common" t-css="false"/>
+                <t t-call-assets="web.report_assets_common" t-css="false"/>
+                <t t-if="editable">
+                    <t t-call-assets="web_editor.summernote" t-css="false"/>
+                    <t t-call-assets="web_editor.assets_editor" t-css="false"/>
+                    <t t-call-assets="web.report_assets_editor" t-css="false"/>
+
+                    <script type="text/javascript" src="/web_editor/static/src/js/iframe.js"></script>
+                    <script t-if="enable_editor and inline_mode" type="text/javascript" src="/web_editor/static/src/js/inline.js"></script>
+                </t>
+                <script>
+                    function subst() {
+                        var vars = {};
+                        var x = document.location.search.substring(1).split('&amp;');
+                        for (var i in x) {
+                            var z = x[i].split('=', 2);
+                            vars[z[0]] = unescape(z[1]);
+                        }
+                        var fromPage = document.getElementsByClassName('page');
+                        for(var j = 0; j&lt;fromPage.length; j++)
+                            fromPage[j].textContent = vars['sitepage'] + 1;
+                        var toPage = document.getElementsByClassName('topage');
+                        for(var j = 0; j&lt;toPage.length; j++)
+                            toPage[j].textContent = vars['sitepages'] + 2;
+                        var miprueba = document.getElementById('miprueba');
+                        miprueba.textContent = vars['sitepages'];
+                    }
+                </script>
+            </head>
+            <body>
+                <div id="wrapwrap">
+                    <main t-att-class="'container' if not full_width else 'container-fluid'">
+                        <t t-raw="0"/>
+                    </main>
+                </div>
+            </body>
+        </html>
+    </template-->
+
+    <template id="account_journal_internal_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <div class="header">
+            <div class="row">
+                <div class="col-11 mb4 text-center">
+                    <h4 t-esc="company.vat" class="p-0 m-0"/>
+                    <h4 t-esc="company.name" class="p-0 m-0"/>
+                    <h4 class="p-0 m-0">Libro Diario</h4>
+                    Periodo Contable del: <span t-esc="date_from"/> al <span t-esc="date_to"/>
+                </div>
+                <div class="col-1">
+                    <span class="page"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="article o_report_layout_standard"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <!--t t-call="web.address_layout"/-->
+            <t t-raw="0"/>
+        </div>
+
+        <!--div class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <li t-if="company.phone" class="list-inline-item">Phone: <span t-field="company.phone"/></li>
+                    <li t-if="company.email" class="list-inline-item">Email: <span t-field="company.email"/></li>
+                    <li t-if="company.website" class="list-inline-item">Web: <span t-field="company.website"/></li>
+                    <li t-if="company.vat" class="list-inline-item"><t t-esc="(company.country_id.vat_label or 'Tax ID').replace(' ','\N{NO-BREAK SPACE}')"/>: <span t-esc="company.vat.replace(' ','\N{NO-BREAK SPACE}')"/></li>
+                </ul>
+
+                <div name="financial_infos">
+                    <span t-field="company.report_footer"/>
+                </div>
+
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Pageaaa: <span class="page"/> / <span class="topage"/>  <span class="miprueba" id="miprueba"/>
+                </div>
+            </div>
+        </div-->
+    </template>
+
+    <template id="account_journal_report">
+        <!--t t-call="account_report_custom.account_report_custom_layout"-->
+        <t t-call="web.html_container">
+            <t t-call="account_report_custom.account_journal_internal_layout">
+                <div class="page">
+                    <table style="width: 100%;">
+                        <t t-foreach="docs.values()" t-as="o">
+                            <tr>
+                                <td style="width: 15%;"><strong>No. <span t-esc="o.get('item')"/></strong></td>
+                                <td colspan="3"><strong><span t-esc="o.get('date').strftime('%d/%b/%Y')"/></strong></td>
+                            </tr>
+                            <t t-set="total_debit" t-value="0"/>
+                            <t t-set="total_credit" t-value="0"/>
+                            <t t-foreach="o.get('debit_lines')" t-as="account_line">
+                                <tr>
+                                    <td style="width: 15%;"><span t-esc="account_line.get('account_code')"/></td>
+                                    <td style="padding-left: 15px;width: 45%;"><span t-esc="account_line.get('account_name')"/></td>
+                                    <td style="text-align: right;width: 20%;">
+                                        <t t-if="account_line.get('account_debit') != 0">
+                                            <span t-esc="account_line.get('account_debit')" t-options="{'widget': 'monetary', 'display_currency': currency}"/>
+                                        </t>
+                                        <t t-else="">
+                                            -
+                                        </t>
+                                    </td>
+                                    <td style="text-align: right;width: 20%;">
+                                        <t t-if="account_line.get('account_credit') != 0">
+                                            <span t-esc="account_line.get('account_credit')" t-options="{'widget': 'monetary', 'display_currency': currency}"/>
+                                        </t>
+                                        <t t-else="">
+                                            -
+                                        </t>
+                                    </td>
+                                    <t t-set="total_debit" t-value="total_debit + account_line.get('account_debit')"/>
+                                    <t t-set="total_credit" t-value="total_credit + account_line.get('account_credit')"/>
+                                </tr>
+                            </t>
+                            <t t-foreach="o.get('credit_lines')" t-as="account_line">
+                                <tr>
+                                    <td style="width: 15%;"><span t-esc="account_line.get('account_code')"/></td>
+                                    <td style="padding-left: 30px;width: 45%;"><span t-esc="account_line.get('account_name')"/></td>
+                                    <td style="text-align: right;width: 20%;">
+                                        <t t-if="account_line.get('account_debit') != 0">
+                                            <span t-esc="account_line.get('account_debit')" t-options="{'widget': 'monetary', 'display_currency': currency}"/>
+                                        </t>
+                                        <t t-else="">
+                                            -
+                                        </t>
+                                    </td>
+                                    <td style="text-align: right;width: 20%;">
+                                        <t t-if="account_line.get('account_credit') != 0">
+                                            <span t-esc="account_line.get('account_credit')" t-options="{'widget': 'monetary', 'display_currency': currency}"/>
+                                        </t>
+                                        <t t-else="">
+                                            -
+                                        </t>
+                                    </td>
+                                    <t t-set="total_debit" t-value="total_debit + account_line.get('account_debit')"/>
+                                    <t t-set="total_credit" t-value="total_credit + account_line.get('account_credit')"/>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td colspan="2" style="text-align: right;">Totales al <span t-esc="o.get('date').strftime('%d/%m/%Y')"/></td>
+                                <td style="border-bottom: double 3px #000;border-top: solid 1px #000;text-align: right;">
+                                    <strong><span t-esc="total_debit" t-options="{'widget': 'monetary', 'display_currency': currency}"/></strong>
+                                </td>
+                                <td style="border-bottom: double 3px #000;border-top: solid 1px #000;text-align: right;">
+                                    <strong><span t-esc="total_credit" t-options="{'widget': 'monetary', 'display_currency': currency}"/></strong>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>
