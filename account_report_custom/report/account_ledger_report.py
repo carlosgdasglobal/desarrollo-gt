@@ -28,6 +28,10 @@ class AccountLedgerReport(models.AbstractModel):
                     fecha = fecha.strftime('%d/%m/%Y')
                     total_debit += account_line.debit
                     total_credit += account_line.credit
+                    if total_debit > total_credit:
+                        name_balance = 'Saldo Deudor'
+                    else:
+                        name_balance = 'Saldo Acreedor'
                     total = total_debit - total_credit
                     if account_name not in res:
                         saldo = account_line.debit - account_line.credit
@@ -38,6 +42,7 @@ class AccountLedgerReport(models.AbstractModel):
                                 'total_debit': total_debit,
                                 'total_credit': total_credit,
                                 'total': total,
+                                'name_balance': name_balance,
                                 'value': [{
                                     'name': account_line.report_item,
                                     'fecha': fecha,
@@ -55,6 +60,7 @@ class AccountLedgerReport(models.AbstractModel):
                         res[account_name]['total_debit'] = total_debit
                         res[account_name]['total_credit'] = total_credit
                         res[account_name]['total'] = total
+                        res[account_name]['name_balance'] = name_balance
                         res[account_name]['value'].append({
                                 'name': account_line.report_item,
                                 'fecha': fecha,

@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name' : 'Reportes Contables Personalizados',
-    'version' : '1.0',
+    'name': 'Reportes Contables Personalizados',
+    'author': 'Andy quijada / Kelvis pernia ',
+    'version': '1.0',
     'summary': 'Invoices & Payments',
     'description': """
-Formatos personalizados para reportes contables
+        Formatos personalizados para reportes contables
     """,
     'category': 'account',
-    'depends' : ['account', 'web'],
+    'depends': ['account', 'web'],
     'data': [
         'report/account_journal_report_view.xml',
         'report/account_ledger_report_view.xml',

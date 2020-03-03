@@ -71,7 +71,7 @@
                                                               <strong><span t-esc="account[1].get('name')"/></strong>
                                                           </td>
                                                           <td colspan="3" style="text-align:center; width: 100px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;">
-                                                              <strong>Saldo Deudor</strong>
+                                                              <strong><span t-esc="account[1].get('name_balance')"/></strong>
                                                           </td>
                                                       </tr>
                                                       <tr>
