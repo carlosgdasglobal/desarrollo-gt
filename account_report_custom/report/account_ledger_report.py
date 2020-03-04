@@ -6,6 +6,7 @@ import dateutil
 
 class AccountLedgerReport(models.AbstractModel):
     _name = 'report.account_report_custom.account_ledger_report'
+    _description = 'Generación del libro mayor'
 
     @api.model
     def _get_report_values(self, docids, data):

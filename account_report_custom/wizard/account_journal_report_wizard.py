@@ -4,6 +4,7 @@ from odoo import api, fields, models
 
 class AccountJournalReportWizard(models.TransientModel):
     _name = 'account.journal.report.wizard'
+    _description = 'wizard del libro diario'
 
     date_from = fields.Date('Desde', required=True)
     date_to = fields.Date('Hasta', required=True)

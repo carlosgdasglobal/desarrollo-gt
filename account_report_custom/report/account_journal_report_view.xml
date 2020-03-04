@@ -78,7 +78,8 @@
         </t>
         <div class="header">
             <div class="row">
-                <div class="col-11 mb4 text-center">
+                <div class="col-1"/>
+                <div class="col-10 mb4 text-center">
                     <h4 t-esc="company.vat" class="p-0 m-0"/>
                     <h4 t-esc="company.name" class="p-0 m-0"/>
                     <h4 class="p-0 m-0">Libro Diario</h4>
@@ -177,7 +178,7 @@
                                 </tr>
                             </t>
                             <tr>
-                                <td colspan="2" style="text-align: right;">Totales al <span t-esc="o.get('date').strftime('%d/%m/%Y')"/></td>
+                                <td colspan="2" style="padding-right: 10px; text-align: right;">Totales al <span t-esc="o.get('date').strftime('%d/%m/%Y')"/></td>
                                 <td style="border-bottom: double 3px #000;border-top: solid 1px #000;text-align: right;">
                                     <strong><span t-esc="total_debit" t-options="{'widget': 'monetary', 'display_currency': currency}"/></strong>
                                 </td>

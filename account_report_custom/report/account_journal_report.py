@@ -6,6 +6,7 @@ from datetime import date, datetime
 
 class AccountJournalReport(models.AbstractModel):
     _name = 'report.account_report_custom.account_journal_report'
+    _description = 'Generación del libro diario'
 
     @api.model
     def _get_report_values(self, docids, data=None):
