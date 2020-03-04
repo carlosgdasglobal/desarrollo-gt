@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_account_journal_report_wizard,account_journal_report_wizard,model_account_journal_report_wizard,base.group_user,1,1,1,1
 access_account_ledger_report_wizard,account_ledger_report_wizard,model_account_ledger_report_wizard,base.group_user,1,1,1,1
+access_tax_book,tax_book,model_tax_book,base.group_user,1,1,1,1
+access_tax_book_line,tax_book_line,model_tax_book_line,base.group_user,1,1,1,1

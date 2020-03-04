@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+
+    <record id="tax_book_line_form_tree" model="ir.ui.view">
+           <field name="name">Lineas libro fiscal</field>
+            <field name="model">tax.book.line</field>
+            <field name="arch" type="xml">
+                <tree string="Lineas libro fiscal">
+                    <field name="id_tax_book" invisible="1"/>
+                    <field name="date_invoice"/>
+                    <field name="vat"/>
+                    <field name="partner_id"/>
+                    <field name="invoice_id" string="Factura"/>
+                    <field name="serie"/>
+                    <field name="invoice_number_id" string="Numero de Factura"/>
+                    <field name="amount_total"/>
+                    <field name="idp"/>
+                    <field name="affected"/>
+                    <field name="amount_untaxed"/>
+                    <field name="amount_tax"/>
+                    <field name="residual" string="Total"/>
+                </tree>
+            </field>
+    </record>
+
+    <record id="tax_book_line_search" model="ir.ui.view">
+        <field name="name">Lineas libro fiscal Search View</field>
+        <field name="model">tax.book.line</field>
+        <field name="arch" type="xml">
+            <search string="Lineas libro fiscal Search">
+                 <field name="type"/>
+            </search>
+        </field>
+    </record>
+
+     <record id="action_tax_book_line_purchase" model="ir.actions.act_window">
+            <field name="name">Lineas libro fiscal</field>
+            <field name="res_model">tax.book.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{'search_default_type': context.get('in_invoice'),
+                'search_default_id_tax_book': context.get(id_tax_book)}</field>
+            <field name="view_id" ref="tax_book_line_form_tree"/>
+            <field name="domain">[('type','=','in_invoice')]</field>
+            <field name="search_view_id" ref="tax_book_line_search"/>
+    </record>
+
+    <record id="action_tax_book_line_sale" model="ir.actions.act_window">
+            <field name="name">Lineas libro fiscal</field>
+            <field name="res_model">tax.book.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{'search_default_id_tax_book': context.get('id_tax_book')}</field>
+            <field name="view_id" ref="tax_book_line_form_tree"/>
+            <field name="domain">[('type','=','out_invoice')]</field>
+            <field name="search_view_id" ref="tax_book_line_search"/>
+    </record>
+
+
+    <record id="view_tax_book" model="ir.ui.view">
+        <field name="name">tax_book</field>
+        <field name="model">tax.book</field>
+        <field name="arch" type="xml">
+            <form string="Libro fiscal">
+                <header>
+                    <button name="update_book"  string="Actualizar libro" type="object" class="oe_highlight"/>
+                    <button name="delete_line"  string="Borrar libro" type="object" class="oe_highlight"/>
+                    <button string='Imprimir libro' name="generate_report" type="object" class="btn-primary"/>
+                    <button name="confirmed"  string="Confirmado" type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="tax_book_line_button_box">
+                        <button string="Lineas libro fiscal"
+                                class="oe_stat_button oe_read_only"
+                                icon="fa-money"
+                                type="action"
+                                name="%(account_report_custom.action_tax_book_line_purchase)d"
+                                context="{'id_tax_book':id_tax_book}"/>
+                    </div>
+                    <group colspant="2">
+                        <group>
+                            <field name="name"/>
+                            <field name="type"/>
+                            <field name="company_id"/>
+                            <field name="date_from" string="Fecha inicio:" required="True"/>
+                            <field name="date_to" string="Fecha final:" required="True"/>
+                        </group>
+                        <group>
+                            <field name="datetime" readonly="1"/>
+                            <field name="user_id" readonly="1"/>
+                        </group>
+                    </group>
+                     <notebook>
+                         <page string="Líneas libro fiscal">
+                             <field name="id_tax_book">
+                                 <tree editable="bottom">
+                                     <field name="date_invoice"/>
+                                     <field name="vat"/>
+                                     <field name="partner_id"/>
+                                     <field name="invoice_id" string="Factura"/>
+                                     <field name="serie"/>
+                                     <field name="invoice_number_id" string="Numero de Factura"/>
+                                     <field name="amount_total"/>
+                                     <field name="idp"/>
+                                     <field name="affected"/>
+                                     <field name="amount_untaxed"/>
+                                     <field name="amount_tax"/>
+                                     <field name="residual" string="Total"/>
+                                 </tree>
+                             </field>
+                         </page>
+                     </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="tax_book_form_tree" model="ir.ui.view">
+           <field name="name">Libro fiscal</field>
+            <field name="model">tax.book</field>
+            <field name="arch" type="xml">
+                <tree string="Libro fiscal de compra">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="company_id"/>
+                    <field name="date_from"/>
+                </tree>
+            </field>
+    </record>
+
+    <record id="action_tax_book_purchase_form" model="ir.actions.act_window">
+            <field name="name">Libro fiscal de compra</field>
+            <field name="res_model">tax.book</field>
+            <field name="view_type">form</field>
+            <field name="context">{'type': 'in_invoice'}</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tax_book_form_tree"/>
+            <field name="domain">[('type','=','in_invoice')]</field>
+    </record>
+
+    <record id="action_tax_book_sale_form" model="ir.actions.act_window">
+            <field name="name">Libro fiscal de venta</field>
+            <field name="res_model">tax.book</field>
+            <field name="view_type">form</field>
+            <field name="context">{'type': 'out_invoice'}</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tax_book_form_tree"/>
+            <field name="domain">[('type','=','out_invoice')]</field>
+
+    </record>
+
+    <menuitem
+        id="tax_book_menu"
+        action="action_tax_book_purchase_form"
+        name="Libro fiscal de compra"
+        parent="account_report_custom.account_report_custom_menu_top"
+        />
+
+    <menuitem
+        id="tax_sale_menu"
+        action="action_tax_book_sale_form"
+        name="Libro fiscal de venta"
+        parent="account_report_custom.account_report_custom_menu_top"
+        />
+
+</odoo>

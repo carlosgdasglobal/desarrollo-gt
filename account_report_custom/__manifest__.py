@@ -13,9 +13,12 @@
     'data': [
         'report/account_journal_report_view.xml',
         'report/account_ledger_report_view.xml',
+        'report/tax_book_report_view.xml',
         'report/report_data.xml',
         'wizard/account_journal_report_wizard_view.xml',
         'wizard/account_ledger_report_wizard_view.xml',
+        'views/account_invoice_view.xml',
+        'views/tax_book_views.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,

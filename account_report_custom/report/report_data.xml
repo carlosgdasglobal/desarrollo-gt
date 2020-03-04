@@ -34,6 +34,20 @@
             paperformat="account_report_custom.paperformat_account_report_custom"
             menu="False"/>
 
+         <record id="paperformat_tax_book_custom" model="report.paperformat">
+            <field name="name">Libros de Compra y Venta</field>
+            <field name="orientation">Landscape</field>
+        </record>
+
+        <report id="tax_book_report"
+            model="tax_book"
+            string="Libro de Compras/Ventas"
+            report_type="qweb-pdf"
+            name="account_report_custom.tax_book_report"
+            file="account_report_custom.tax_book_report"
+            paperformat="account_report_custom.paperformat_tax_book_custom"
+            menu="False"/>
+
     </data>
 </odoo>
 
