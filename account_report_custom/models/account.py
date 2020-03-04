@@ -1,4 +1,5 @@
 # *.* coding: utf-8 -*-
+# Comentario de prueba
 
 from odoo import api, fields, models
 
