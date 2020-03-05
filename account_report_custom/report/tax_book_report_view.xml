@@ -18,10 +18,10 @@
         <div class="header">
             <div class="row">
                 <div class="col-12 mb4 text-center">
+                    <h4 class="p-0 m-0">NIT <span t-esc="company.vat"/></h4>
                     <h4 t-esc="company.name" class="p-0 m-0"/>
                     <h4 t-field="o.type" class="p-0 m-0"/>
                     <h4 t-esc="datetime.datetime.now().strftime('%B %Y')" class="p-0 m-0" style="text-transform: capitalize;"/>
-                    <h4>NIT <span t-esc="company.vat"/></h4>
                 </div>
                 <!--div class="col-1">
                     a<span class="topage"/>
@@ -42,22 +42,22 @@
                     <div class="page">
                         <table class="table">
                             <tr>
-                                <th style="text-align:center;">FECHA</th>
-                                <th style="text-align:center;">NIT</th>
+                                <th style="text-align:center;border: 2px solid #000 !important;border-right: none !important;">FECHA</th>
+                                <th style="text-align:center;border-top: 2px solid #000 !important;border-bottom: 2px solid #000 !important;">NIT</th>
                                 <t t-if="o.type == 'in_invoice'">
-                                    <th style="text-align:center;">PROVEEDOR</th>
+                                    <th style="text-align:center;border-top: 2px solid #000 !important;border-bottom: 2px solid #000 !important;">PROVEEDOR</th>
                                 </t>
                                 <t t-else="">
-                                    <th style="text-align:center;">CLIENTE</th>
+                                    <th style="text-align:center;border-top: 2px solid #000 !important;border-bottom: 2px solid #000 !important;">CLIENTE</th>
                                 </t>
-                                <th style="text-align:center;">SERIE</th>
-                                <th style="text-align:center;">FACTURA</th>
-                                <th style="text-align:center;">BASE</th>
-                                <th style="text-align:center;">IDP</th>
-                                <th style="text-align:center;">No Afecto</th>
-                                <th style="text-align:center;">BASE</th>
-                                <th style="text-align:center;">IVA</th>
-                                <th style="text-align:center;">TOTAL</th>
+                                <th style="text-align:center;border-top: 2px solid #000 !important;border-bottom: 2px solid #000 !important;">SERIE</th>
+                                <th style="text-align:center;border-top: 2px solid #000 !important;border-bottom: 2px solid #000 !important;">FACTURA</th>
+                                <th style="text-align:center;border-top: 2px solid #000 !important;border-bottom: 2px solid #000 !important;">BASE</th>
+                                <th style="text-align:center;border-top: 2px solid #000 !important;border-bottom: 2px solid #000 !important;">IDP</th>
+                                <th style="text-align:center;border-top: 2px solid #000 !important;border-bottom: 2px solid #000 !important;">No Afecto</th>
+                                <th style="text-align:center;border-top: 2px solid #000 !important;border-bottom: 2px solid #000 !important;">BASE</th>
+                                <th style="text-align:center;border-top: 2px solid #000 !important;border-bottom: 2px solid #000 !important;">IVA</th>
+                                <th style="text-align:center;border: 2px solid #000 !important;border-left: none !important;">TOTAL</th>
                             </tr>
                             <t t-set="total_amount_total" t-value="0"/>
                             <t t-set="total_idp" t-value="0"/>
@@ -67,17 +67,17 @@
                             <t t-set="total_residual" t-value="0"/>
                             <t t-foreach="o.id_tax_book" t-as="line">
                                 <tr>
-                                    <td><span t-esc="line.date_invoice.strftime('%d/%m/%Y')"/></td>
-                                    <td><span t-field="line.vat"/></td>
-                                    <td><span t-field="line.partner_id.name"/></td>
-                                    <td><span t-field="line.serie"/></td>
-                                    <td><span t-field="line.invoice_id.number"/></td>
-                                    <td style="text-align:right;"><span t-field="line.amount_total"/></td>
-                                    <td style="text-align:right;"><span t-field="line.idp"/></td>
-                                    <td style="text-align:right;"><span t-field="line.affected"/></td>
-                                    <td style="text-align:right;"><span t-field="line.amount_untaxed"/></td>
-                                    <td style="text-align:right;"><span t-field="line.amount_tax"/></td>
-                                    <td style="text-align:right;"><span t-field="line.residual"/></td>
+                                    <td style="border-bottom: 1px solid #000 !important;"><span t-esc="line.date_invoice.strftime('%d/%m/%Y')"/></td>
+                                    <td style="border-bottom: 1px solid #000 !important;"><span t-field="line.vat"/></td>
+                                    <td style="border-bottom: 1px solid #000 !important;"><span t-field="line.partner_id.name"/></td>
+                                    <td style="border-bottom: 1px solid #000 !important;"><span t-field="line.serie"/></td>
+                                    <td style="border-bottom: 1px solid #000 !important;"><span t-field="line.sudo().invoice_id.number"/></td>
+                                    <td style="text-align:right;border-bottom: 1px solid #000 !important;"><span t-field="line.amount_total"/></td>
+                                    <td style="text-align:right;border-bottom: 1px solid #000 !important;"><span t-field="line.idp"/></td>
+                                    <td style="text-align:right;border-bottom: 1px solid #000 !important;"><span t-field="line.affected"/></td>
+                                    <td style="text-align:right;border-bottom: 1px solid #000 !important;"><span t-field="line.amount_untaxed"/></td>
+                                    <td style="text-align:right;border-bottom: 1px solid #000 !important;"><span t-field="line.amount_tax"/></td>
+                                    <td style="text-align:right;border-bottom: 1px solid #000 !important;"><span t-field="line.residual"/></td>
                                 </tr>
                                 <t t-set="total_amount_total" t-value="total_amount_total + line.amount_total"/>
                                 <t t-set="total_idp" t-value="total_idp + line.idp"/>
@@ -87,13 +87,13 @@
                                 <t t-set="total_residual" t-value="total_residual + line.residual"/>
                             </t>
                             <tr>
-                                <td colspan="5" style="text-align: right;"><strong>TOTALES</strong></td>
-                                <td style="text-align:right;"><span t-esc="total_amount_total" t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/></td>
-                                <td style="text-align:right;"><span t-esc="total_idp" t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/></td>
-                                <td style="text-align:right;"><span t-esc="total_affected" t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/></td>
-                                <td style="text-align:right;"><span t-esc="total_amount_untaxed" t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/></td>
-                                <td style="text-align:right;"><span t-esc="total_amount_tax" t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/></td>
-                                <td style="text-align:right;"><span t-esc="total_residual" t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/></td>
+                                <td colspan="5" style="text-align: right;border-top: 2px solid #000 !important;"><strong>TOTALES</strong></td>
+                                <td style="text-align:right;border-top: 2px solid #000 !important;"><span t-esc="total_amount_total" t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/></td>
+                                <td style="text-align:right;border-top: 2px solid #000 !important;"><span t-esc="total_idp" t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/></td>
+                                <td style="text-align:right;border-top: 2px solid #000 !important;"><span t-esc="total_affected" t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/></td>
+                                <td style="text-align:right;border-top: 2px solid #000 !important;"><span t-esc="total_amount_untaxed" t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/></td>
+                                <td style="text-align:right;border-top: 2px solid #000 !important;"><span t-esc="total_amount_tax" t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/></td>
+                                <td style="text-align:right;border-top: 2px solid #000 !important;"><span t-esc="total_residual" t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/></td>
                             </tr>
                         </table>
                     </div>

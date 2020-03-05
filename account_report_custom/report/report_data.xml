@@ -13,7 +13,7 @@
             <field name="margin_left">5</field>
             <field name="margin_right">5</field>
             <field name="header_line" eval="False"/>
-            <field name="header_spacing">10</field>
+            <field name="header_spacing">30</field>
             <field name="dpi">90</field>
         </record>
 
@@ -31,12 +31,14 @@
             report_type="qweb-pdf"
             name="account_report_custom.account_ledger_report"
             file="account_report_custom.account_ledger_report"
-            paperformat="account_report_custom.paperformat_account_report_custom"
             menu="False"/>
 
          <record id="paperformat_tax_book_custom" model="report.paperformat">
             <field name="name">Libros de Compra y Venta</field>
+            <field name="default" eval="True"/>
             <field name="orientation">Landscape</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
         </record>
 
         <report id="tax_book_report"
@@ -46,7 +48,8 @@
             name="account_report_custom.tax_book_report"
             file="account_report_custom.tax_book_report"
             paperformat="account_report_custom.paperformat_tax_book_custom"
-            menu="False"/>
+            menu="False"
+            print_report_name="(object.type in ('in_invoice')) and 'Libro de compras.pdf' or 'Libro de ventas.pdf')"/>
 
     </data>
 </odoo>

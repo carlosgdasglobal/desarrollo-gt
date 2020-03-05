@@ -12,5 +12,5 @@ class AccountMoveLine(models.Model):
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
-    invoice_number_id = fields.Integer(string='Número de factura', size=20)
-    serie = fields.Integer(string='Serie', size=10)
+    invoice_number_id = fields.Char(string='Número de factura', size=20)
+    serie = fields.Char(string='Serie', size=10)

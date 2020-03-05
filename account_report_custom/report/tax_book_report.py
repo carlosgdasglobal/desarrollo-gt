@@ -12,7 +12,6 @@ class TaxBookReport(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
         ids = data.get('ids')
         model = data.get('model')
-        currency = self.env.user.company_id.currency_id
         docs = self.env[model].browse(ids)
 
         return {
