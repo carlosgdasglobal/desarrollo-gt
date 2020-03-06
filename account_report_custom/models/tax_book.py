@@ -34,7 +34,7 @@ class Taxbook(models.Model):
     def update_book(self):
         account_id = self.env['account.invoice']
         account = account_id.sudo().search([('type', '=', self.type), ('date_invoice', '>=', self.date_from),
-                                            ('date_invoice', '<=', self.date_to)], order='date asc')
+                                            ('date_invoice', '<=', self.date_to), ('state','not in', ['draft'])], order='date asc')
         if account:
             for accoun in account:
                 idp = 0
