@@ -6,11 +6,12 @@ from datetime import date, datetime
 
 class AccountJournalReport(models.AbstractModel):
     _name = 'report.account_report_custom.account_journal_report'
+    _description = 'Generación del libro diario'
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        date_from = data['form']['date_from']
-        date_to = data['form']['date_to']
+        date_from = datetime.strptime(data['form']['date_from'], '%Y-%m-%d')
+        date_to = datetime.strptime(data['form']['date_to'], '%Y-%m-%d')
         currency = self.env.user.company_id.currency_id
         docs = OrderedDict()
         account_move_line = self.env['account.move.line'].search([('date', '>=', date_from), ('date', '<=', date_to)],

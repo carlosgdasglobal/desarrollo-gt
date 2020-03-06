@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <!--template id="account_report_custom_layout" name="Account report layout">
-        &lt;!DOCTYPE html&gt;
+    <template id="account_journal_external_layout" name="Account report layout">&lt;!DOCTYPE html&gt;
         <html t-att-lang="lang and lang.replace('_', '-')"
               t-att-data-editable="'1' if editable else None"
               t-att-data-translatable="'1' if translatable else None"
@@ -34,25 +33,13 @@
                     <script t-if="enable_editor and inline_mode" type="text/javascript" src="/web_editor/static/src/js/inline.js"></script>
                 </t>
                 <script>
-                    function subst() {
-                        var vars = {};
-                        var x = document.location.search.substring(1).split('&amp;');
-                        for (var i in x) {
-                            var z = x[i].split('=', 2);
-                            vars[z[0]] = unescape(z[1]);
+                        function subst() {
+                            var toPage = document.getElementsByClassName('topage');
+                            toPage[0].textContent = 22222222;
                         }
-                        var fromPage = document.getElementsByClassName('page');
-                        for(var j = 0; j&lt;fromPage.length; j++)
-                            fromPage[j].textContent = vars['sitepage'] + 1;
-                        var toPage = document.getElementsByClassName('topage');
-                        for(var j = 0; j&lt;toPage.length; j++)
-                            toPage[j].textContent = vars['sitepages'] + 2;
-                        var miprueba = document.getElementById('miprueba');
-                        miprueba.textContent = vars['sitepages'];
-                    }
-                </script>
+                    </script>
             </head>
-            <body>
+            <body t-att-onload="'subst()'">
                 <div id="wrapwrap">
                     <main t-att-class="'container' if not full_width else 'container-fluid'">
                         <t t-raw="0"/>
@@ -60,7 +47,7 @@
                 </div>
             </body>
         </html>
-    </template-->
+    </template>
 
     <template id="account_journal_internal_layout">
         <t t-if="not o" t-set="o" t-value="doc"/>
@@ -78,11 +65,12 @@
         </t>
         <div class="header">
             <div class="row">
-                <div class="col-11 mb4 text-center">
+                <div class="col-1"/>
+                <div class="col-10 mb4 text-center">
                     <h4 t-esc="company.vat" class="p-0 m-0"/>
                     <h4 t-esc="company.name" class="p-0 m-0"/>
                     <h4 class="p-0 m-0">Libro Diario</h4>
-                    Periodo Contable del: <span t-esc="date_from"/> al <span t-esc="date_to"/>
+                    Periodo contable del: <span t-esc="date_from.strftime('%d/%m/%Y')"/> al <span t-esc="date_to.strftime('%d/%m/%Y')"/>
                 </div>
                 <div class="col-1">
                     <span class="page"/>
@@ -116,7 +104,7 @@
     </template>
 
     <template id="account_journal_report">
-        <!--t t-call="account_report_custom.account_report_custom_layout"-->
+        <!--t t-call="account_report_custom.account_journal_external_layout"-->
         <t t-call="web.html_container">
             <t t-call="account_report_custom.account_journal_internal_layout">
                 <div class="page">
@@ -177,7 +165,7 @@
                                 </tr>
                             </t>
                             <tr>
-                                <td colspan="2" style="text-align: right;">Totales al <span t-esc="o.get('date').strftime('%d/%m/%Y')"/></td>
+                                <td colspan="2" style="padding-right: 10px; text-align: right;">Totales al <span t-esc="o.get('date').strftime('%d/%m/%Y')"/></td>
                                 <td style="border-bottom: double 3px #000;border-top: solid 1px #000;text-align: right;">
                                     <strong><span t-esc="total_debit" t-options="{'widget': 'monetary', 'display_currency': currency}"/></strong>
                                 </td>

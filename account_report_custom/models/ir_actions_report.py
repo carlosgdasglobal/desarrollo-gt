@@ -16,4 +16,6 @@ class IrActionsReport(models.Model):
                                                                             landscape,
                                                                             specific_paperformat_args,
                                                                             set_viewport_size)
-        command_args.extend(['--orientation', 'landscape'])
+        return command_args
+        command_args.extend(['--page-offset', '8'])
+        return command_args
