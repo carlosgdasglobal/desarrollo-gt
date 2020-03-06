@@ -160,6 +160,7 @@
         action="action_tax_book_purchase_form"
         name="Libro fiscal de compra"
         parent="account_report_custom.account_report_custom_menu_top"
+        sequence="3"
         />
 
     <menuitem
@@ -167,6 +168,7 @@
         action="action_tax_book_sale_form"
         name="Libro fiscal de venta"
         parent="account_report_custom.account_report_custom_menu_top"
+        sequence="4"
         />
 
 </odoo>

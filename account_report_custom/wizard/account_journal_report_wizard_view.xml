@@ -33,7 +33,7 @@
                   name="Reportes contables"
                   parent="account.menu_finance_reports"
                   sequence="20"/>
-        <menuitem name="Libro diario" id="menu_account_journal_report_wizard" action="action_account_journal_report_wizard" parent="account_report_custom_menu_top"/>
+        <menuitem name="Libro diario" id="menu_account_journal_report_wizard" action="action_account_journal_report_wizard" parent="account_report_custom_menu_top" sequence="1"/>
 
     </data>
 </odoo>

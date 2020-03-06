@@ -47,13 +47,13 @@ class Taxbook(models.Model):
                             idp += invoice_tax.amount_total
                         else:
                             tax += invoice_tax.amount_total
-                        amount_untaxed += invoice_tax.base
                 else:
                     affected = accoun.amount_total
                 if self.type == 'out_invoice':
                     invoice_number_id = accoun.number
                 else:
                     invoice_number_id = accoun.invoice_number_id
+                amount_untaxed = accoun.amount_total - (idp + tax)
                 self.id_tax_book.sudo().create({
                     'id_tax_book': self.id,
                     'invoice_id': accoun.id,
@@ -82,8 +82,7 @@ class Taxbook(models.Model):
             'ids': self.ids,
             'model': self._name,
         }
-        return self.env.ref('account_report_custom.tax_book_report').report_action(self, data=data)
-
+        return self.env.ref('account_report_custom.tax_book_report_main').report_action(self, data=data)
 
 class Taxbookline(models.Model):
     _name = 'tax.book.line'

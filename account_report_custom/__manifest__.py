@@ -9,7 +9,7 @@
         Formatos personalizados para reportes contables
     """,
     'category': 'account',
-    'depends': ['account', 'web'],
+    'depends': ['account', 'account_accountant', 'web'],
     'data': [
         'report/account_journal_report_view.xml',
         'report/account_ledger_report_view.xml',

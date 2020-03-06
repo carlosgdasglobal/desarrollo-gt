@@ -30,5 +30,5 @@
     </record>
 
 	<menuitem id="menu_account_ledger_report_wizard" name="Libro mayor" parent="account_report_custom.account_report_custom_menu_top"
-			  action="action_account_ledger_report_wizard" sequence="0"/>
+			  action="action_account_ledger_report_wizard" sequence="2"/>
 </odoo>

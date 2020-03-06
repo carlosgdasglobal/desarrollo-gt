@@ -17,7 +17,7 @@
             <field name="dpi">90</field>
         </record>
 
-        <report id="account_journal_report"
+        <report id="account_journal_report_main"
             model="account.journal.report.wizard"
             string="Libro diario"
             report_type="qweb-pdf"
@@ -25,7 +25,7 @@
             file="account_report_custom.account_journal_report"/>
 
         <report
-            id="account_ledger_report"
+            id="account_ledger_report_main"
             model="account.invoice"
             string="Libro mayor"
             report_type="qweb-pdf"
@@ -36,12 +36,15 @@
          <record id="paperformat_tax_book_custom" model="report.paperformat">
             <field name="name">Libros de Compra y Venta</field>
             <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">337</field>
+            <field name="page_width">210</field>
             <field name="orientation">Landscape</field>
-            <field name="margin_left">3</field>
-            <field name="margin_right">3</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
         </record>
 
-        <report id="tax_book_report"
+        <report id="tax_book_report_main"
             model="tax_book"
             string="Libro de Compras/Ventas"
             report_type="qweb-pdf"

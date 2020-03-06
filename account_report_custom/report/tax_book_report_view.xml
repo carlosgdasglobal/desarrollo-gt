@@ -21,7 +21,7 @@
                     <h4 class="p-0 m-0">NIT <span t-esc="company.vat"/></h4>
                     <h4 t-esc="company.name" class="p-0 m-0"/>
                     <h4 t-field="o.type" class="p-0 m-0"/>
-                    <h4 t-esc="datetime.datetime.now().strftime('%B %Y')" class="p-0 m-0" style="text-transform: capitalize;"/>
+                    <h4 t-esc="report.date_format(datetime.datetime.now())" class="p-0 m-0" style="text-transform: capitalize;"/>
                 </div>
                 <!--div class="col-1">
                     a<span class="topage"/>
@@ -67,11 +67,11 @@
                             <t t-set="total_residual" t-value="0"/>
                             <t t-foreach="o.id_tax_book" t-as="line">
                                 <tr>
-                                    <td style="border-bottom: 1px solid #000 !important;"><span t-esc="line.date_invoice.strftime('%d/%m/%Y')"/></td>
-                                    <td style="border-bottom: 1px solid #000 !important;"><span t-field="line.vat"/></td>
-                                    <td style="border-bottom: 1px solid #000 !important;"><span t-field="line.partner_id.name"/></td>
-                                    <td style="border-bottom: 1px solid #000 !important;"><span t-field="line.serie"/></td>
-                                    <td style="border-bottom: 1px solid #000 !important;"><span t-field="line.sudo().invoice_id.number"/></td>
+                                    <td style="text-align:center;border-bottom: 1px solid #000 !important;"><span t-esc="line.date_invoice.strftime('%d/%m/%Y')"/></td>
+                                    <td style="text-align:center;border-bottom: 1px solid #000 !important;"><span t-field="line.vat"/></td>
+                                    <td style="text-align:center;border-bottom: 1px solid #000 !important;"><span t-field="line.partner_id.name"/></td>
+                                    <td style="text-align:center;border-bottom: 1px solid #000 !important;"><span t-field="line.serie"/></td>
+                                    <td style="text-align:center;border-bottom: 1px solid #000 !important;"><span t-field="line.invoice_number_id"/></td>
                                     <td style="text-align:right;border-bottom: 1px solid #000 !important;"><span t-field="line.amount_total"/></td>
                                     <td style="text-align:right;border-bottom: 1px solid #000 !important;"><span t-field="line.idp"/></td>
                                     <td style="text-align:right;border-bottom: 1px solid #000 !important;"><span t-field="line.affected"/></td>

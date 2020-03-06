@@ -112,7 +112,7 @@
                         <t t-foreach="docs.values()" t-as="o">
                             <tr>
                                 <td style="width: 15%;"><strong>No. <span t-esc="o.get('item')"/></strong></td>
-                                <td colspan="3"><strong><span t-esc="o.get('date').strftime('%d/%b/%Y')"/></strong></td>
+                                <td colspan="3"><strong><span t-esc="report.date_format(o.get('date'))"/></strong></td>
                             </tr>
                             <t t-set="total_debit" t-value="0"/>
                             <t t-set="total_credit" t-value="0"/>

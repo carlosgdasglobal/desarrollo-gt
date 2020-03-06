@@ -20,4 +20,4 @@ class AccountJournalReportWizard(models.TransientModel):
                 'date_to': self.date_to
             }
         }
-        return self.env.ref('account_report_custom.account_journal_report').report_action(self, data=data)
+        return self.env.ref('account_report_custom.account_journal_report_main').report_action(self, data=data)

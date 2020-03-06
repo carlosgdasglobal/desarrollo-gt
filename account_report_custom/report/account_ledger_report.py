@@ -86,7 +86,7 @@ class AccountLedgerReport(models.AbstractModel):
         res_list = sorted(res.items())
         docargs = {
                 'doc_ids': docids,
-                'doc': self.env['account.invoice'].sudo().browse(1),
+                'docs': self.env['account.invoice'].sudo().browse(1),
                 'de_account': res_list,
                 'fecha_inicio': date_from,
                 'fecha_final': date_to,

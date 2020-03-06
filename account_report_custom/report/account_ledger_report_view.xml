@@ -25,7 +25,7 @@
                       <h4 t-esc="company.vat" class="p-0 m-0"/>
                       <h4 t-esc="company.name" class="p-0 m-0"/>
                       <h4 class="p-0 m-0">Libro Mayor</h4>
-                      Período contable del: <span t-att-style="style" t-esc="fecha_inicio"/> al <span t-att-style="style" t-esc="fecha_final"/>
+                      Período contable del: <span t-att-style="style" t-esc="fecha_inicio.strftime('%d-%m-%Y')"/> al <span t-att-style="style" t-esc="fecha_final.strftime('%d-%m-%Y')"/>
                   </div>
                   <div class="col-1">
                       <span class="page"/>
@@ -39,8 +39,8 @@
 
       <template id="account_ledger_report">
           <t t-call="web.html_container">
-              <t t-foreach="doc" t-as="o">
-                  <t t-call="account_report_custom.account_ledger_internal_layout">
+              <t t-call="account_report_custom.account_ledger_internal_layout">
+                  <t t-foreach="docs" t-as="o">
                       <div class="page">
                           <div class="row">
                               <table style="width: 100%; overflow-y: auto !important; border-width: 0px !important;">
@@ -62,10 +62,10 @@
                                                       </tr>
                                                       <tr>
                                                           <td colspan="2" style="width: 100px !important;"/>
-                                                          <td style="text-align:center; width: 100px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;">
+                                                          <td style="width: 100px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;">
                                                               <strong>Partida</strong>
                                                           </td>
-                                                          <td style="text-align:center; width: 100px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;" >
+                                                          <td style="width: 100px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;" >
                                                               <strong>Fecha</strong>
                                                           </td>
                                                           <td colspan="6" style="width: 450px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;" />
@@ -82,14 +82,14 @@
                                                       <t t-foreach="account[1]['value']" t-as="line">
                                                           <tr>
                                                               <td colspan="2" style="width: 100px !important;"/>
-                                                              <td style="text-align:center; width: 100px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;">
+                                                              <td style="width: 100px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;">
                                                                   <span t-esc="line.get('name')"/>
                                                               </td>
-                                                              <td style="text-align:center; width: 100px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;" >
+                                                              <td style="width: 100px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;" >
                                                                   <span t-esc="line.get('fecha')"/>
                                                               </td>
                                                               <td colspan="6" style="width: 450px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;" />
-                                                              <td style="text-align:center; width: 200px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;" >
+                                                              <td style="text-align:right; width: 200px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;" >
                                                                   <t t-if="line.get('debit')">
                                                                       <span t-esc="line.get('debit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                                                   </t>
@@ -97,7 +97,7 @@
                                                                       -
                                                                   </t>
                                                               </td>
-                                                              <td style="text-align:center; width: 200px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;" >
+                                                              <td style="text-align:right; width: 200px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;" >
                                                                   <t t-if="line.get('credit')">
                                                                       <span t-esc="line.get('credit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                                                   </t>
@@ -105,7 +105,7 @@
                                                                       -
                                                                   </t>
                                                               </td>
-                                                              <td colspan="2" style="text-align:center; width: 300px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;">
+                                                              <td colspan="2" style="text-align:right; width: 300px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;">
                                                                   <t t-if="line.get('saldo')">
                                                                       <span t-esc="line.get('saldo')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                                                   </t>
@@ -119,7 +119,7 @@
                                                           <td colspan="10" style="text-align:center; width: 100px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;">
                                                               <strong>Totales por Cuenta</strong>
                                                           </td>
-                                                          <td style="text-align:center; width: 200px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;" >
+                                                          <td style="text-align:right; width: 200px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;" >
                                                               <t t-if="account[1].get('total_debit')">
                                                                   <span t-esc="account[1].get('total_debit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                                               </t>
@@ -127,7 +127,7 @@
                                                                   -
                                                               </t>
                                                           </td>
-                                                          <td style="text-align:center; width: 200px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;" >
+                                                          <td style="text-align:right; width: 200px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;" >
                                                               <t t-if="account[1].get('total_credit')">
                                                                   <span t-esc="account[1].get('total_credit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                                               </t>
@@ -135,7 +135,7 @@
                                                                   -
                                                               </t>
                                                           </td>
-                                                          <td colspan="2" style="text-align:center; width: 300px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;">
+                                                          <td colspan="2" style="text-align:right; width: 300px; overflow-y: auto !important; vertical-align:middle; border-width: 0px  !important;">
                                                               <t t-if="account[1].get('total')">
                                                                   <span t-esc="account[1].get('total')"  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                                               </t>

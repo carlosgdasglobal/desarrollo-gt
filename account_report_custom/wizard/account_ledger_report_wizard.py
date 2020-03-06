@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models
+from datetime import date
 
 class AccountLedgerReportWizard(models.TransientModel):
     _name = "account.ledger.report.wizard"
     _description = "Wizard para libro mayor"
 
     date_from = fields.Date(string='Start Date')
-    date_to = fields.Date(string='End Date')
+    date_to = fields.Date(string='End Date', default=lambda x: date.today())
 
     @api.multi
     def check_report(self):
@@ -23,4 +24,4 @@ class AccountLedgerReportWizard(models.TransientModel):
             'model': 'account.invoice',
             'data': data
         }
-        return self.env.ref('account_report_custom.account_ledger_report').report_action([], data=datas)
+        return self.env.ref('account_report_custom.account_ledger_report_main').report_action([], data=datas)

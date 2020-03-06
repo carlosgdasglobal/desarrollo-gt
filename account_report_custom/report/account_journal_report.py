@@ -3,10 +3,15 @@
 from odoo import _, api, models
 from collections import OrderedDict
 from datetime import date, datetime
+import locale
 
 class AccountJournalReport(models.AbstractModel):
     _name = 'report.account_report_custom.account_journal_report'
     _description = 'Generación del libro diario'
+
+    def date_format(self, date):
+        locale.setlocale(locale.LC_ALL, 'es_GT.utf8')
+        return date.strftime('%d/%b/%Y')
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -60,5 +65,6 @@ class AccountJournalReport(models.AbstractModel):
             'date_from': date_from,
             'date_to': date_to,
             'currency': currency,
-            'docs': docs
+            'docs': docs,
+            'report': self
         }
